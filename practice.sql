@@ -2,7 +2,7 @@
 -- 国名を全て抽出してください。
 SELECT
     name
-    FROM
+FROM
     countries
     ;
 
@@ -15,9 +15,9 @@ SELECT
     continent,
     region,
     surface_area
-    FROM
+FROM
     countries
-    WHERE
+WHERE
     region like '%Europe%'
     ;
 
@@ -30,9 +30,9 @@ SELECT
     continent,
     region,
     surface_area
-    FROM
+FROM
     countries
-    WHERE NOT
+WHERE NOT
     region like '%Europe%'
     ;
 
@@ -47,9 +47,9 @@ SELECT
     surface_area,
     indep_year,
     population
-    FROM
+FROM
     countries
-    WHERE
+WHERE
     population >= 100000
     ;
 
@@ -63,9 +63,9 @@ SELECT
     continent,
     region,
     life_expectancy
-    FROM
+FROM
     countries
-    WHERE
+WHERE
     life_expectancy >= 56 AND
     life_expectancy <= 76
     ;
@@ -79,7 +79,7 @@ SELECT
     country_code
     FROM
     cities
-    WHERE
+WHERE
     country_code = 'NLB' OR
     country_code = 'ALB' OR
     country_code = 'DZA'
@@ -95,9 +95,9 @@ SELECT
     region,
     surface_area,
     indep_year
-    FROM
+FROM
     countries
-    WHERE
+WHERE
     indep_year IS NULL
     ;
 
@@ -111,9 +111,9 @@ SELECT
     region,
     surface_area,
     indep_year
-    FROM
+FROM
     countries
-    WHERE
+WHERE
     indep_year IS NOT NULL
     ;
 
@@ -127,9 +127,9 @@ SELECT
     continent,
     region,
     surface_area
-    FROM
+FROM
     countries
-    WHERE
+WHERE
     name like '%ia'
     ;
 
@@ -142,9 +142,9 @@ SELECT
     continent,
     region,
     surface_area
-    FROM
+FROM
     countries
-    WHERE
+WHERE
     name like '%st%'
     ;
 
@@ -157,9 +157,9 @@ SELECT
     continent,
     region,
     surface_area
-    FROM
+FROM
     countries
-    WHERE
+WHERE
     name like 'an%'
     ;
 
@@ -171,9 +171,9 @@ SELECT
     name,
     indep_year,
     population
-    FROM
+FROM
     countries
-    WHERE
+WHERE
     indep_year < 1990 OR
     population > 100000
     ;
@@ -188,9 +188,9 @@ SELECT
     region,
     surface_area,
     indep_year
-    FROM
+FROM
     countries
-    WHERE
+WHERE
     indep_year <1990 AND
     (code = 'DZA' OR code = 'ALB')
     ;
@@ -200,7 +200,7 @@ SELECT
 -- 全ての地方をグループ化せずに表示してください。
 SELECT DISTINCT
     region
-    FROM
+FROM
     countries
     ;
 
@@ -208,9 +208,9 @@ SELECT DISTINCT
 -- 問15
 -- 国名と人口を以下のように表示させてください。シングルクォートに注意してください。
 -- 「Arubaの人口は103000人です」
-SELECT CONCAT
-    (name,'の人口は',population,'です')
-    FROM
+SELECT
+    CONCAT(name,'の人口は',population,'です')
+FROM
     countries
     ;
 
@@ -220,11 +220,11 @@ SELECT CONCAT
 SELECT
     name,
     life_expectancy
-    FROM
+FROM
     countries
-    WHERE
+WHERE
     life_expectancy IS NOT NULL
-    ORDER BY
+ORDER BY
     life_expectancy ASC
     ;
 
@@ -234,11 +234,11 @@ SELECT
 SELECT
     name,
     life_expectancy
-    FROM
+FROM
     countries
-    WHERE
+WHERE
     life_expectancy IS NOT NULL
-    ORDER BY
+ORDER BY
     life_expectancy DESC
     ;
 
@@ -249,9 +249,9 @@ SELECT
     name,
     life_expectancy,
     indep_year
-    FROM
+FROM
     countries
-    ORDER BY
+ORDER BY
     life_expectancy DESC,
     indep_year DESC
     ;
@@ -262,7 +262,7 @@ SELECT
 SELECT
     SUBSTRING(CODE,1,1),
     name
-    FROM
+FROM
     countries
     ;
 
@@ -273,9 +273,9 @@ SELECT
 SELECT
     name,
     LENGTH(name)
-    FROM
+FROM
     countries
-    ORDER BY
+ORDER BY
     LENGTH(name) DESC
     ;
 
@@ -286,9 +286,9 @@ SELECT
     region,
     AVG(life_expectancy) AS `平均寿命`,
     AVG(population) AS `平均人口`
-    FROM
+FROM
     countries
-    GROUP BY
+GROUP BY
     region
     ;
 
@@ -299,9 +299,9 @@ SELECT
     region,
     MAX(life_expectancy) AS `最大寿命`,
     MAX(population) AS `最大人口`
-    FROM
+FROM
     countries
-    GROUP BY
+GROUP BY
     region
     ;
 
@@ -310,9 +310,9 @@ SELECT
 -- アジア大陸の中で最小の表面積を表示してください
 SELECT
     MIN(surface_area) AS `アジアの最小面積`
-    FROM
+FROM
     countries
-    WHERE
+WHERE
     continent like 'Asia'
     ;
 
@@ -321,9 +321,9 @@ SELECT
 -- アジア大陸の表面積の合計を表示してください。
 SELECT
     SUM(surface_area) AS `アジア大陸の表面積の合計`
-    FROM
+FROM
     countries
-    WHERE
+WHERE
     continent like 'Asia'
     ;
 
@@ -333,11 +333,11 @@ SELECT
 SELECT
     countries.name,
     countrylanguages.language
-    FROM
+FROM
     countries
-    JOIN
+JOIN
     countrylanguages
-    ON
+ON
     countries.code = countrylanguages.country_code
     ;
 
@@ -348,15 +348,15 @@ SELECT
     countries.name AS `国名`,
     cities.name AS `市区町村名`,
     countrylanguages.language AS language
-    FROM
+FROM
     countries
-    JOIN
+JOIN
     cities
-    ON
+ON
     countries.code = cities.country_code
-    JOIN
+JOIN
     countrylanguages
-    ON
+ON
     countries.code = countrylanguages.country_code
     ;
 
@@ -366,11 +366,11 @@ SELECT
 SELECT
     celebrities.name,
     countries.name
-    FROM
+FROM
     celebrities
-    LEFT JOIN
+LEFT JOIN
     countries
-    ON
+ON
     celebrities.country_code = countries.code
     ;
 
@@ -381,17 +381,17 @@ SELECT
     celebrities.name,
     countries.name,
     countrylanguages.language
-    FROM
+FROM
     celebrities
-    LEFT JOIN
+LEFT JOIN
     countries
-    ON
+ON
     celebrities.country_code = countries.code
-    JOIN
+JOIN
     countrylanguages
-    ON
+ON
     countries.code = countrylanguages.country_code
-    WHERE
+WHERE
     countrylanguages.is_official = 'T'
     ;
 
@@ -402,14 +402,13 @@ SELECT
     cel.name AS celebrity_name,
     (
     SELECT
-    cou.name
+        cou.name
     FROM
-    countries cou
+        countries cou
     WHERE
-    cou.code = cel.country_code
-    )
-    AS country_name
-    FROM
+        cou.code = cel.country_code
+    ) AS country_name
+FROM
     celebrities cel
     ;
 
@@ -420,15 +419,15 @@ SELECT
     country_code,
     MAX(age) AS 'MAX(ce.age)',
     MIN(age) AS 'MIN(ce.age)'
-    FROM
+FROM
     celebrities
-    WHERE
+WHERE
     country_code IS NOT NULL AND
     country_code <> '' AND
     age IS NOT NULL
-    GROUP BY
+GROUP BY
     country_code
-    HAVING
+HAVING
     MAX(age) >= 50 AND
     MIN(age) <= 30
     ;
@@ -439,17 +438,17 @@ SELECT
 SELECT
     '1991' AS '誕生年',
     COUNT(id) '人数'
-    FROM
+FROM
     celebrities
-    WHERE
+WHERE
     SUBSTRING(birth,1,4) = '1991'
-    UNION
-    SELECT
+UNION
+SELECT
     '1981' AS '誕生年',
     COUNT(id) '人数'
-    FROM
+FROM
     celebrities
-    WHERE
+WHERE
     SUBSTRING(birth,1,4) = '1981'
     ;
 
@@ -459,14 +458,14 @@ SELECT
 SELECT
     countries.name AS '国名',
     AVG(celebrities.age) AS '平均年齢'
-    FROM
+FROM
     countries
-    JOIN
+JOIN
     celebrities
-    ON
+ON
     countries.code = celebrities.country_code
-    GROUP BY
+GROUP BY
     countries.name
-    ORDER BY
+ORDER BY
     AVG(celebrities.age) DESC
     ;
